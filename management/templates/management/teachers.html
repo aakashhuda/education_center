@@ -25,8 +25,19 @@
                         <input type="submit" value="upload">
                     </form>
                 {% endif %}
-            {% else %}
+            {% elif teacher.gender == "female" %}
                 <img src="{% static 'management/female.png' %}" class="img-thumbnail" alt="">
+                <br>
+                {% if request.user.id %}
+                    <form action="{% url 'management:upload_pic' %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                        <input type="hidden" name="name", value="{{teacher.name}}">
+                        <input type="submit" class="btn btn-success" value="Upload">
+                    </form>
+                {% endif %}
+            {% else %}
+                <img src="{% static 'management/transgender.jpg' %}" class="img-thumbnail" alt="">
                 <br>
                 {% if request.user.id %}
                     <form action="{% url 'management:upload_pic' %}" method="POST" enctype="multipart/form-data">

@@ -51,7 +51,7 @@
                 </ul>
                 <div class="d-flex">
                   {% if request.user.id %}
-                    <a class="btn btn-sm btn-outline-success" role="button" href="{% url 'login:logout' %}">Logout {{request.user|title}}</a>
+                    <a class="btn btn-sm btn-success" role="button" href="{% url 'login:logout' %}">Logout {{request.user|title}}</a>
                   {% endif %}
                 </div>
               </div>

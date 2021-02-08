@@ -25,7 +25,11 @@
                 <tr>
                   <th scope="row">{{department.id}}</th>
                   <td><a href="{% url 'management:courses' department %}">{{department.name}}</a></td>
-                  <td>{{department.department_head.get}}</td>
+                  {% if department.department_head.get %}
+                    <td>{{department.department_head.get}}</td>
+                  {% else %}
+                    <td>N/A</td>
+                  {% endif %}
                 </tr>
               {% endfor %}
             </tbody>
