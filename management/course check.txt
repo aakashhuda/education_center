@@ -1,0 +1,20 @@
+#in view function
+if courses:
+                for course in courses:
+                    print(course)
+                    coursee = Course.objects.get(name=course)
+                    if coursee.check_capacity():
+                        student.courses.add(coursee)
+                        coursee.increase_student()
+                        coursee.save()
+                return HttpResponse("Added Student to the courses.")
+#in forms.py
+c_choices = []
+try:
+    available_courses = Course.objects.all()
+    for course in available_courses:
+        c = (course.name,course.name)
+        c_choices.append(c)
+
+except ObjectDoesNotExist:
+    pass

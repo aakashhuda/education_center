@@ -1,0 +1,64 @@
+{% extends 'management/layout.html' %}
+{% load static %}
+
+{% block title %}
+    Teachers
+{% endblock %}
+
+{% block body %}
+
+<h3 class="text-center">All Teachers</h3>
+<div class="row">
+    {% for teacher in teachers %}
+    <div class="col-lg-3 border border-white rounded mx p-4" style="background-color:#05F1B8;">
+        {% if teacher.pro_pic %}
+            <img class="img-thumbnail" src="{{ teacher.pro_pic.url }}" alt="Profile picture of {{teacher.name}}">
+        {% else %}
+            {% if teacher.gender == "male" %}
+                <img src="{% static 'management/male.png' %}" class="img-thumbnail" alt="">
+                <br>
+                {% if request.user.id %}
+                    <form action="{% url 'management:upload_pic' %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                        <input type="hidden" name="name", value="{{teacher.name}}">
+                        <input type="submit" value="upload">
+                    </form>
+                {% endif %}
+            {% else %}
+                <img src="{% static 'management/female.png' %}" class="img-thumbnail" alt="">
+                <br>
+                {% if request.user.id %}
+                    <form action="{% url 'management:upload_pic' %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                        <input type="hidden" name="name", value="{{teacher.name}}">
+                        <input type="submit" class="btn btn-success" value="Upload">
+                    </form>
+                {% endif %}
+            {% endif %}
+
+        {% endif %}
+    </div>
+    <div class="col-lg-6 border border-white rounded mx p-4" style="background-color:#4DF9DA;">
+        <p><strong>Name:</strong> {{teacher.name}}</p>
+        <p><strong>Department:</strong> {{teacher.department}}</p> 
+        <p><strong>Gender:</strong> {{teacher.gender|title}}</p> 
+        <p><strong>Age:</strong> {{teacher.age}}</p>
+        {% if teacher.head %}
+            <p>Head of <strong><a href="{% url 'management:courses' teacher.head %}">{{teacher.head}}</a></strong> Department</p>
+        {% endif %}
+    
+
+    </div>
+    <div class="col-lg-3">
+        
+            
+    </div>
+
+    
+    {% empty %}
+        <p><strong>Message:</strong> No registered teacher found! </p>
+    {% endfor %}
+</div>
+{% endblock %}

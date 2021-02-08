@@ -1,0 +1,29 @@
+{% extends "management/layout.html" %}
+{% block title %}
+Home
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-3">
+
+        </div>
+        <div class="col-lg-6 border border-white rounded mx p-4" style="background-color:#05F1B8;">
+            <h3>Register New Course</h3>
+            <form action="{% url 'management:save_course' %}" method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <input class="btn btn-sm btn-success" type="submit">
+            </form>
+            <br>
+            {% if message %}
+                {{message}}
+            {% endif %}
+        </div>
+
+        <div class="col-lg-3">
+        </div>
+        
+    </div>
+
+{% endblock %}

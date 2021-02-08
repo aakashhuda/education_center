@@ -1,0 +1,39 @@
+{% extends "management/layout.html" %}
+{% load static %}
+
+{% block title %}
+    Departments
+{% endblock %}
+
+{% block body %}
+<h3 class="text-center">All Departments</h3>
+    <div class="row">
+        <div class="col-lg-3">
+
+        </div>
+        <div class="col-lg-6">
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Department Name</th>
+                <th scope="col">Department Head</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for department in departments %}
+                <tr>
+                  <th scope="row">{{department.id}}</th>
+                  <td><a href="{% url 'management:courses' department %}">{{department.name}}</a></td>
+                  <td>{{department.department_head.get}}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <div class="col-lg-3">
+
+        </div>
+    </div>
+    
+{% endblock %}

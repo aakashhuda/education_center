@@ -1,0 +1,38 @@
+{% extends "management/layout.html" %}
+
+{% block title %}
+    Add Student
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-3">
+
+        </div>
+        <div class="col-lg-6 border border-white rounded mx p-4" style="background-color:#05F1B8;">
+            <h3 class="">Register New Student</h3>
+
+            <form action="{% url 'management:save_student' %}" method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <p>
+                {% if request.GET.next %}
+                    <input type="hidden" name="next" value="{{request.GET.next}}">
+                {% endif %}
+            </p>
+            
+                <input class="btn btn-sm btn-success" type="submit">
+                
+            </form>
+            <br>
+            {% if message %}
+                {{message}}
+            {% endif %}
+            <br>
+        </div>
+        <div class="col-lg-3">
+
+        </div>
+    </div>
+    
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "login/layout.html" %}
+{% load static %}
+
+{% block title %}
+    loggedin
+{% endblock %}
+    
+{% block body %}
+<h1>welcome {{request.user.id}}</h1>
+<a href="{% url 'login:logout' %}">Logout {{request.user|title}}</a>
+{% endblock %}

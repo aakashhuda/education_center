@@ -1,0 +1,14 @@
+* {
+    font-family: 'Pathway Gothic One', sans-serif;
+    font-size: 18px;
+}
+
+body {
+    background-color: #fff;
+}
+.navbar {
+    background-color: #2C3E50 ;
+}
+a {
+    text-decoration: none!important;
+}

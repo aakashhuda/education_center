@@ -1,0 +1,52 @@
+{% extends "management/layout.html" %}
+{% load static %}
+{% block title %}
+    Assign Course
+{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-lg-3">
+        <img src="{% static 'management/assign_course.png' %}" alt="assign_course" style="width: 250px;" class="">
+    </div>
+    <div class="col-lg-6 border border-white rounded mx p-4" style="background-color:#05F1B8;">
+        <h3 class="">Assign Course to Student</h3>
+        <form action="{% url 'management:save_to_course' %}", method="POST">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Available Courses from the dropdown</label>
+                <select name="course" class="form-control form-control-sm" id="exampleFormControlSelect1">
+                    {% for course in courses %}
+                        <option value="{{course.name}}">{{course}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="a">Students List</label>
+                <select name="student" class="form-control form-control-sm" id="a">
+                    {% for student in students %}
+                        <option value="{{student.name}}">{{student}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <p>
+            {% if request.GET.next %}
+                <input type="hidden" name="next" value="{{request.GET.next}}">
+            
+            {% endif %}
+            </p>
+            
+            <input class="btn btn-sm btn-success" type="submit">
+        
+        </form>
+        <br>
+        {% if message %}
+            {{message}}
+        {% endif %}
+    </div>
+    <div class="col-lg-3">
+
+    </div>
+</div>
+    {% endblock %}

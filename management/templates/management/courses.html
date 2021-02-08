@@ -1,0 +1,31 @@
+{% extends "management/layout.html" %}
+{% load static %}
+
+{% block title %}
+    Departments
+{% endblock %}
+
+{% block body %}
+<h3 class="text-center">{{department|title}} Department offered Courses</h3>
+    <div class="row">
+        <div class="col-lg-3">
+
+        </div>
+        <div class="col-lg-6">
+            <h5>List</h5>
+            {% for course in courses %}
+                <ul>
+                    <li value="{{course.name}}"><a href="{% url 'management:course_details' department course.name %}">{{course}}</a></li>
+                </ul>
+            {% empty %}
+                <ul>
+                    <li>No course offered</li>
+                </ul>
+            {% endfor %}
+        </div>
+        <div class="col-lg-3">
+
+        </div>
+    </div>
+    
+{% endblock %}
